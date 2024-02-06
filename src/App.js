@@ -1,12 +1,11 @@
-// App.js
 import React, { useState } from 'react';
 import './App.css';
-import Checked from './Checked';
+
 
 function App() {
   const [toDos, setToDos] = useState([]);
   const [todo, setToDo] = useState("");
-
+ 
   const deleteTodo = (id) => {
     setToDos(toDos.filter(obj => obj.id !== id));
   };
@@ -27,8 +26,12 @@ function App() {
           <h2 className='d-flex justify-center'>What's On your Mind?</h2>
         </div>
         <div className="input">
-          <input value={todo} onChange={(e) => setToDo(e.target.value)} type="text" placeholder="🖊️ Add Task..." />
-          <i onClick={() => setToDos([...toDos, { id: Date.now(), name: todo, status: false }])} className="fas fa-plus"></i>
+          <input value={todo} onChange={(e) => setToDo(e.target.value) } type="text" placeholder="🖊️ Add Task..." />
+          <i onClick={() => {
+            setToDos([...toDos, { id: Date.now(), name: todo, status: false }]);
+      
+            setToDo("");
+          }} className="fas fa-plus"></i>
         </div>
         {
           toDos.map((obj) => {
@@ -55,8 +58,7 @@ function App() {
           })
         }
       </div>
-      <div className="second-part">
-        <Checked toDos={toDos} />
+      <div className='footer'>
       </div>
     </div>
   );
